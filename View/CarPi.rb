@@ -25,11 +25,14 @@ class CarPi < FXApp
     setup_view_models
     setup_dashboard
 
-    puts 'Initializing OBD Connection'
-    @obd.connect
+    unless ENV['DO_NOT_CONNECT'] == '1'
+      puts 'Initializing OBD Connection'
 
-    puts 'Starting event loop'
-    start_guage_fetch
+      @obd.connect
+      puts 'Starting event loop'
+
+      start_guage_fetch
+  end
 
     create
     run
