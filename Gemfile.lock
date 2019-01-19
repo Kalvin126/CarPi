@@ -1,0 +1,22 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ffi (1.9.25)
+    fxruby (1.6.39)
+      mini_portile2 (~> 2.1)
+    mini_portile2 (2.4.0)
+    rubyserial (0.6.0)
+      ffi (~> 1.9, >= 1.9.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  fxruby!
+  rubyserial!
+
+RUBY VERSION
+   ruby 2.4.1p111
+
+BUNDLED WITH
+   1.17.1
