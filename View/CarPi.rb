@@ -6,6 +6,7 @@ require_relative "../obd/Response"
 require_relative "Dashboard"
 require_relative "GaugeViewModel"
 require_relative "DurationViewModel"
+require_relative "ConfigManager"
 
 require 'pry'
 
@@ -17,7 +18,8 @@ class CarPi < FXApp
   def initialize(port = '/dev/tty.usbserial-113010892918')
     super
 
-    @obd = OBD::Connection.new port
+    @config_manager = ConfigManager.new
+    @obd = OBD::Connection.new @config_manager.port
     @dashboard = Dashboard.new self
 
     puts 'Initializing UI'
