@@ -15,7 +15,7 @@ include Fox
 
 class CarPi < FXApp
 
-  def initialize(port = '/dev/tty.usbserial-113010892918')
+  def initialize
     super
 
     @config_manager = ConfigManager.new
