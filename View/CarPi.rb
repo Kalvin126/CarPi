@@ -43,9 +43,9 @@ class CarPi < FXApp
   def setup_models
     @gauges = [
       Gauge.turbo_boost,
+      Gauge.fuel_air_ratio,
       Gauge.gauge_for_command(:intake_manifold_absolute_pressure),
       Gauge.gauge_for_command(:absolute_barometric_pressure),
-      Gauge.gauge_for_command(:fuel_air_commanded_equivalence_ratio),
       Gauge.gauge_for_command(:calculated_engine_load),
       Gauge.gauge_for_command(:fuel_system_status),
       Gauge.gauge_for_command(:engine_coolant_temperature_6),
