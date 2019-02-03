@@ -43,6 +43,10 @@ class CarPi < FXApp
       start_guage_fetch
     end
 
+    if ENV['RECORD_MOCK'] == '1'
+      @frame = 0
+    end
+
     create
     run
   end
@@ -100,6 +104,27 @@ class CarPi < FXApp
 
     if ENV['MOCK'] == '1'
       @obd.increment_frame_data
+    end
+
+    if ENV['RECORD_MOCK'] == '1'
+      dump_frame_data(results.values)
+
+      @frame += 1
+    end
+  end
+
+  def dump_frame_data(data)
+    file_name = "frame_#{@frame}.json"
+    data_folder = './obd/Mock/Data'
+
+    json_data = data
+      .map { |response|
+        [response.command.command, response.raw_response]
+      }
+      .to_h
+
+    File.open(data_folder + '/' + file_name, 'w') do |file|
+      file.write JSON.pretty_generate(json_data)
     end
   end
 
