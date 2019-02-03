@@ -2,6 +2,7 @@ require_relative "../obd/Command"
 require_relative "../obd/Connection"
 require_relative "../obd/Gauge"
 require_relative "../obd/Response"
+require_relative "../obd/Mock/MockConnection"
 
 require_relative "Dashboard"
 require_relative "GaugeViewModel"
@@ -19,7 +20,13 @@ class CarPi < FXApp
     super
 
     @config_manager = ConfigManager.new
-    @obd = OBD::Connection.new @config_manager.port
+
+    if ENV['MOCK'] == '1'
+      @obd = MockConnection.new
+    else
+      @obd = OBD::Connection.new @config_manager.port
+    end
+
     @dashboard = Dashboard.new self
 
     puts 'Initializing UI'
@@ -28,13 +35,13 @@ class CarPi < FXApp
     setup_dashboard
 
     unless ENV['DO_NOT_CONNECT'] == '1'
-      puts 'Initializing OBD Connection'
+      puts 'Initializing Connection'
 
       @obd.connect
       puts 'Starting event loop'
 
       start_guage_fetch
-  end
+    end
 
     create
     run
@@ -90,6 +97,10 @@ class CarPi < FXApp
 
     update_view(results)
     @duration_view_model.update(total_time)
+
+    if ENV['MOCK'] == '1'
+      @obd.increment_frame_data
+    end
   end
 
   def update_guages
