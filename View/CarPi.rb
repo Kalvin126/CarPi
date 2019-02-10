@@ -86,7 +86,9 @@ class CarPi < FXApp
   ## Actions
 
   def start_guage_fetch
-    @timeout = addTimeout(0.2, :repeat => true) do |sender, sel, data|
+    delay = @config_manager.fetch_delay
+
+    @timeout = addTimeout(delay, :repeat => true) do |sender, sel, data|
       update_data
     end 
   end

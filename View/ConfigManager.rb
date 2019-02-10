@@ -7,15 +7,31 @@ class ConfigManager
   end
 
   def port
+    default = '/dev/ttyUSB0'
+
     obd_config = @config['obd']
 
-    return '/dev/ttyUSB0' if obd_config.nil?
+    return default if obd_config.nil?
 
     port = obd_config['port']
 
-    return '/dev/ttyUSB0' if port.nil?
+    return default if port.nil?
 
     return port
+  end
+
+  def fetch_delay
+    default = 500
+
+    obd_config = @config['obd']
+
+    return default if obd_config.nil?
+
+    fetch_delay = obd_config['fetch_delay']
+
+    return default if fetch_delay.nil?
+
+    return fetch_delay
   end
 
 end
