@@ -150,8 +150,6 @@ class CarPi < FXApp
     puts "\nUpdating View"
 
     @view_models.each { |view_model| view_model.update results }
-
-    # repaint
   end
 
 end
