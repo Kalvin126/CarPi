@@ -1,2 +1,0 @@
-obd:
-  port: /dev/ttyUSB0
