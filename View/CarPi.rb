@@ -9,8 +9,6 @@ require_relative "GaugeViewModel"
 require_relative "DurationViewModel"
 require_relative "ConfigManager"
 
-require 'pry'
-
 require 'fox16'
 include Fox
 
