@@ -20,6 +20,7 @@ class CarPi < FXApp
     @config_manager = ConfigManager.new
 
     if ENV['MOCK'] == '1'
+      puts 'MOCK MODE'
       @obd = MockConnection.new
     else
       @obd = OBD::Connection.new @config_manager.port
@@ -56,7 +57,6 @@ class CarPi < FXApp
       Gauge.turbo_boost,
       Gauge.fuel_air_ratio,
       Gauge.gauge_for_command(:intake_manifold_absolute_pressure),
-      Gauge.gauge_for_command(:absolute_barometric_pressure),
       Gauge.gauge_for_command(:calculated_engine_load),
       Gauge.gauge_for_command(:fuel_system_status),
       Gauge.gauge_for_command(:engine_coolant_temperature_6),

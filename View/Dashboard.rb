@@ -9,7 +9,7 @@ class Dashboard < FXMainWindow
     def initialize(app)
       super(app, 'CarPi', :width => 480, :height => (800-40))
   
-      @font = FXFont.new(app, 'Helvetica Neue', 18)
+      @font = FXFont.new(app, 'Helvetica Neue', 22)
       @back_color = Fox.FXRGB(0, 0, 0)
   
       setBackColor(@back_color)
