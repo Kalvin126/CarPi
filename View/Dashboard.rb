@@ -6,8 +6,10 @@ SPACING = 200.0
 
 class Dashboard < FXMainWindow
 
-    def initialize(app)
+    def initialize(app, system)
       super(app, 'CarPi', :width => 480, :height => (800-40))
+
+      @system = system
   
       @font = FXFont.new(app, 'Helvetica Neue', 22)
       @back_color = Fox.FXRGB(0, 0, 0)
@@ -32,6 +34,18 @@ class Dashboard < FXMainWindow
   
       @right_frame = FXVerticalFrame.new(@mainframe, :opts => LAYOUT_FILL_X)
       @right_frame.setBackColor(@back_color)
+    end
+
+    def add_brightness_buttons
+      increase_brightness_button = FXButton.new(@left_frame, 'Increase Brightness')
+      increase_brightness_button.connect(SEL_COMMAND) do
+        @system.increase_brightness
+      end
+
+      decrease_brightness_button = FXButton.new(@left_frame, 'Decrease Brightness')
+      decrease_brightness_button.connect(SEL_COMMAND) do
+        @system.decrease_brightness
+      end
     end
   
     ### Actions

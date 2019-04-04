@@ -8,6 +8,7 @@ require_relative "Dashboard"
 require_relative "GaugeViewModel"
 require_relative "DurationViewModel"
 require_relative "ConfigManager"
+require_relative "System"
 
 require 'fox16'
 include Fox
@@ -18,6 +19,7 @@ class CarPi < FXApp
     super
 
     @config_manager = ConfigManager.new
+    @system = System.new
 
     if ENV['MOCK'] == '1'
       puts 'MOCK MODE'
@@ -26,7 +28,7 @@ class CarPi < FXApp
       @obd = OBD::Connection.new @config_manager.port
     end
 
-    @dashboard = Dashboard.new self
+    @dashboard = Dashboard.new self, @system
 
     puts 'Initializing UI'
     setup_models
@@ -79,6 +81,7 @@ class CarPi < FXApp
     }
 
     @dashboard.add_control_label(@duration_view_model)
+    @dashboard.add_brightness_buttons
   end
 
   ## Actions
